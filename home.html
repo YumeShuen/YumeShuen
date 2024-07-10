@@ -1,0 +1,172 @@
+﻿<HTML>
+<HEAD>
+    
+    <!--載入按鈕的css-->
+	<style media="screen">
+    	*,
+*:before,
+*:after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.container{
+    background-color: #ffffff;
+    width: 500px;
+    height: 350px;
+
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 50%;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+.image-container{
+    position: relative;
+}
+img{
+    position: relative;
+    width: 460px;
+		height: 280px;
+    display: none;
+}
+.active{
+    display: block;
+}
+.dot-container{
+    width: 250px;
+    margin: 20px auto 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+button{
+    outline: none;
+    cursor: pointer;
+}
+.dot-container button{
+    height: 15px;
+    width: 50px;
+    border-radius: 10%;
+    border: 3px solid #076bb8;
+    background-color: transparent;
+}
+.dot-container button:nth-child(1){
+    background-color: #076bb8;
+}
+#prev,#next{
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    background-color: #076bb8;
+    color: #ffffff;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    border: none;
+    border-radius: 3px;
+    font-size: 18px;
+    font-weight: bolder;
+}
+#prev{
+    left: 5px;
+}
+#next{
+    right: 5px;
+}
+    </style>
+    <style>
+        @import url("../button.css");
+        /*import css模板*/
+    </style>
+    <TITLE>好好611靈糧堂</TITLE>
+    <!--強制使用統一碼-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</HEAD>
+<body background="../背景1.png" style=" background-repeat:no-repeat ;background-size:100% 100%;background-attachment: fixed;">
+    <!--background用來放背景的-->
+    <img src="../圖片a.png" div style="position: absolute; top: 0;"><!--放置logo-->
+    <p id="demo"></p>
+    <!--切換不同頁面-->
+    <div id="navigation" div style="position: absolute; top: 70;">
+        <ul>
+            <li><a href="home.html">首頁</a></li>
+            <li><a href="new.html">最新資訊</a></li>
+            <li><a href="aboutme.html">關於我們</a></li>
+        </ul>
+    </div>
+    <!--language切換語言-->
+    <div class="dropdown" div style="position: absolute; right: 0; top: 0;">
+        <button class="dropbtn">語言</button>
+        <div class="dropdown-content">
+            <a href="../cn/home.html">中文</a>
+            <a href="../en/home.html">English</a>
+            <a href="../jp/home.html">日本語</a>
+        </div>
+    </div>
+    <!--滾動至開頭畫面-->
+    <div>
+        <ul>
+
+            <li><a id="test" style="position: fixed; right: 10px; bottom: 10px; cursor: pointer">回到顶部</a></li>
+
+        </ul>
+    </div>
+
+    <script src=../top.js></script>
+	<div class="container">
+        <div class="image-container">
+            <img src="C:/Users/s181096/OneDrive - Heung To Middle School(TSW)/鍾啟迪/611/圖片a.png" id="content1" class="active">
+            <img src="C:/Users/s181096/OneDrive - Heung To Middle School(TSW)/鍾啟迪/611/圖片b.png" id="content2">
+            <img src="C:/Users/s181096/OneDrive - Heung To Middle School(TSW)/鍾啟迪/611/圖片c.png" id="content3">
+        </div>
+        <div class="dot-container">
+            <button onclick = "dot(1)"></button>
+            <button onclick = "dot(2)"></button>
+            <button onclick = "dot(3)"></button>
+        </div>
+        <button id="prev" onclick="prev()"> &lt; </button>
+        <button id="next" onclick="next()"> &gt; </button>
+    </div>
+    <script type="text/javascript">
+let i = 0; // current slide
+let j = 3; // total slides
+
+const dots = document.querySelectorAll(".dot-container button");
+const images = document.querySelectorAll(".image-container img");
+
+function next(){
+    document.getElementById("content" + (i+1)).classList.remove("active");
+    i = ( j + i + 1) % j;
+    document.getElementById("content" + (i+1)).classList.add("active");
+    indicator( i+ 1 );
+}
+
+function prev(){
+    document.getElementById("content" + (i+1)).classList.remove("active");
+    i = (j + i - 1) % j;
+    document.getElementById("content" + (i+1)).classList.add("active");
+    indicator(i+1);
+}
+
+function indicator(num){
+    dots.forEach(function(dot){
+        dot.style.backgroundColor = "transparent";
+    });
+    document.querySelector(".dot-container button:nth-child(" + num + ")").style.backgroundColor = "#076bb8";
+}
+
+function dot(index){
+    images.forEach(function(image){
+        image.classList.remove("active");
+    });
+    document.getElementById("content" + index).classList.add("active");
+    i = index - 1;
+    indicator(index);
+}
+    </script>
+</body>
+
+</HTML>
